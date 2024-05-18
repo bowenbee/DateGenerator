@@ -1,0 +1,13 @@
+Title,MonthNum,Day,WeekNum,DayofWeekNum,HolidayType,FixedHoliday,Notes
+New Year's Day,1,1,0,0,Federal,TRUE,Always on January 1st
+"Birthday of Martin Luther King, Jr.",1,0,3,2,Federal,FALSE,Third Monday in January
+Washington’s Birthday,2,0,3,2,Federal,FALSE,Third Thursday in February
+Memorial Day,5,0,0,2,Federal,FALSE,The last Monday in May. Note: The week number may vary as May can have 4 or 5 weeks.
+Juneteenth National Independence Day,6,19,0,2,Federal,TRUE,Always falls on June 19th
+Independence Day,7,4,0,2,Federal,TRUE,Always on July 4th
+Labor Day,9,0,1,2,Federal,FALSE,First Monday in September
+Columbus Day,10,0,2,2,Federal,FALSE,Second Monday in October
+Veterns Day,11,11,0,0,Federal,TRUE,Always on the 11th
+Thanksgiving Day,11,0,4,5,Federal,FALSE,Fourth Thursday of November
+Christmas Day,12,25,0,0,Federal,TRUE,Always on December 25th
+Inauguration Day,1,20,0,2,Federal,TRUE,"This holiday is designated as ""Inauguration Day"" in section 6103(c) of title 5 of the United States Code, which is the law that specifies holidays for Federal employees. Federal employees in the Washington, DC, area are entitled to a holiday on the day a President is inaugurated on January 20th for each fourth year after 1965"
