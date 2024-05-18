@@ -2,7 +2,7 @@
   "EnvironmentVariables": [
     {
       "SchemaName": "bb89_DateGeneratorList",
-      "Value": "cf236cdc-0fb6-430a-bb05-250e0103343f",
+      "Value": "7a8c4431-e3ee-4c55-aeee-e0ecde1e16a8",
       "Name": {
         "Default": "Date Generator List",
         "ByLcid": {
@@ -18,7 +18,7 @@
     },
     {
       "SchemaName": "bb89_HolidaysList",
-      "Value": "42640389-2b36-47e3-a0d0-38631dda577c",
+      "Value": "673fb164-1d3e-4d62-a3b5-40884a566439",
       "Name": {
         "Default": "Holidays List",
         "ByLcid": {
