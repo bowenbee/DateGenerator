@@ -1,0 +1,64 @@
+{
+  "EnvironmentVariables": [
+    {
+      "SchemaName": "bb89_DateGeneratorList",
+      "Value": "",
+      "Name": {
+        "Default": "Date Generator List",
+        "ByLcid": {
+          "1033": "Date Generator List"
+        }
+      },
+      "Description": {
+        "Default": "Destination List where Dates will be created",
+        "ByLcid": {
+          "1033": "Destination List where Dates will be created"
+        }
+      }
+    },
+    {
+      "SchemaName": "bb89_HolidaysList",
+      "Value": "",
+      "Name": {
+        "Default": "Holidays List",
+        "ByLcid": {
+          "1033": "Holidays List"
+        }
+      },
+      "Description": {
+        "Default": "List of Holidays for Date Generator",
+        "ByLcid": {
+          "1033": "List of Holidays for Date Generator"
+        }
+      }
+    },
+    {
+      "SchemaName": "bb89_SandboxSite",
+      "Value": "",
+      "DefaultValue": "https://powerfxhelp.sharepoint.com/sites/Sandbox",
+      "Name": {
+        "Default": "Sandbox Site",
+        "ByLcid": {
+          "1033": "Sandbox Site"
+        }
+      }
+    }
+  ],
+  "ConnectionReferences": [
+    {
+      "LogicalName": "bb89_DateGenSharePoint",
+      "ConnectionId": "",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+    },
+    {
+      "LogicalName": "bb89_sharedexcelonlinebusiness_216f7",
+      "ConnectionId": "",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness"
+    },
+    {
+      "LogicalName": "bb89_sharedonedriveforbusiness_38459",
+      "ConnectionId": "",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+    }
+  ]
+}
