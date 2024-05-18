@@ -2,7 +2,7 @@
   "EnvironmentVariables": [
     {
       "SchemaName": "bb89_DateGeneratorList",
-      "Value": "",
+      "Value": "cf236cdc-0fb6-430a-bb05-250e0103343f",
       "Name": {
         "Default": "Date Generator List",
         "ByLcid": {
@@ -18,7 +18,7 @@
     },
     {
       "SchemaName": "bb89_HolidaysList",
-      "Value": "",
+      "Value": "42640389-2b36-47e3-a0d0-38631dda577c",
       "Name": {
         "Default": "Holidays List",
         "ByLcid": {
@@ -34,7 +34,7 @@
     },
     {
       "SchemaName": "bb89_SandboxSite",
-      "Value": "",
+      "Value": "https://powerfxhelp.sharepoint.com/sites/Sandbox",
       "DefaultValue": "https://powerfxhelp.sharepoint.com/sites/Sandbox",
       "Name": {
         "Default": "Sandbox Site",
@@ -47,17 +47,17 @@
   "ConnectionReferences": [
     {
       "LogicalName": "bb89_DateGenSharePoint",
-      "ConnectionId": "",
+      "ConnectionId": "0a645bd0ebb74fa883a2c539c03070f1",
       "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
     },
     {
       "LogicalName": "bb89_sharedexcelonlinebusiness_216f7",
-      "ConnectionId": "",
+      "ConnectionId": "006fc39300204703ab5cd7e6488b8341",
       "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness"
     },
     {
       "LogicalName": "bb89_sharedonedriveforbusiness_38459",
-      "ConnectionId": "",
+      "ConnectionId": "153c18fb57674f5ea97a3dd1b9a90153",
       "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
     }
   ]
