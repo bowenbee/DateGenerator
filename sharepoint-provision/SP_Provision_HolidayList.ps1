@@ -2,8 +2,7 @@
 
 $SharePointSite = "https://powerfxhelp.sharepoint.com/sites/Sandbox"
 $ListName = "Holidays-Test"
-$HolidayCsv = Import-Csv .\Holidays.csv
-
+$HolidayCsv = Import-Csv ..\data\Holidays.csv
 Connect-PnPOnline -url $SharePointSite -Interactive
 
 
