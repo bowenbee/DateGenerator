@@ -1,7 +1,7 @@
 Title,MonthNum,Day,WeekNum,DayofWeekNum,HolidayType,FixedHoliday,Notes
 New Year's Day,1,1,0,0,Federal,TRUE,Always on January 1st
 "Birthday of Martin Luther King, Jr.",1,0,3,2,Federal,FALSE,Third Monday in January
-Washington’s Birthday,2,0,3,2,Federal,FALSE,Third Thursday in February
+Washington's Birthday,2,0,3,2,Federal,FALSE,Third Thursday in February
 Memorial Day,5,0,0,2,Federal,FALSE,The last Monday in May. Note: The week number may vary as May can have 4 or 5 weeks.
 Juneteenth National Independence Day,6,19,0,2,Federal,TRUE,Always falls on June 19th
 Independence Day,7,4,0,2,Federal,TRUE,Always on July 4th

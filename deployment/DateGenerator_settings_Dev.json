@@ -1,0 +1,70 @@
+{
+  "EnvironmentVariables": [
+    {
+      "SchemaName": "bb89_DateGeneratorList",
+      "Value": "633769e6-f846-4ab8-adac-be0a687a9699",
+      "Name": {
+        "Default": "Date Generator List",
+        "ByLcid": {
+          "1033": "Date Generator List"
+        }
+      },
+      "TypeId": 100000004,
+      "Description": {
+        "Default": "Destination List where Dates will be created",
+        "ByLcid": {
+          "1033": "Destination List where Dates will be created"
+        }
+      },
+      "IsRequired": false
+    },
+    {
+      "SchemaName": "bb89_HolidaysList",
+      "Value": "9bdb164d-779d-4f11-b212-3d66171bbb50",
+      "Name": {
+        "Default": "Holidays List",
+        "ByLcid": {
+          "1033": "Holidays List"
+        }
+      },
+      "TypeId": 100000004,
+      "Description": {
+        "Default": "List of Holidays for Date Generator",
+        "ByLcid": {
+          "1033": "List of Holidays for Date Generator"
+        }
+      },
+      "IsRequired": false
+    },
+    {
+      "SchemaName": "bb89_SandboxSite",
+      "Value": "https://powerfxhelp.sharepoint.com/sites/Sandbox",
+      "DefaultValue": "",
+      "Name": {
+        "Default": "Sandbox Site",
+        "ByLcid": {
+          "1033": "Sandbox Site"
+        }
+      },
+      "TypeId": 100000004,
+      "IsRequired": false
+    }
+  ],
+  "ConnectionReferences": [
+    {
+      "LogicalName": "bb89_DateGenSharePoint",
+      "ConnectionId": "0a645bd0ebb74fa883a2c539c03070f1",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+    },
+    {
+      "LogicalName": "bb89_sharedexcelonlinebusiness_216f7",
+      "ConnectionId": "006fc39300204703ab5cd7e6488b8341",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness"
+    },
+    {
+      "LogicalName": "bb89_sharedonedriveforbusiness_38459",
+      "ConnectionId": "153c18fb57674f5ea97a3dd1b9a90153",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+    }
+  ]
+}
