@@ -16,26 +16,26 @@ The goal of this project is to develop an application that allows users to gener
 ## User Stories
 
 1. Generate List of Dates
-    · User Story: As a user, I want to input a start and end date into an app and generate a list of dates within that range.
-    · Acceptance Criteria:
+    - User Story: As a user, I want to input a start and end date into an app and generate a list of dates within that range.
+    - Acceptance Criteria:
         The user can input a start date and an end date.
         The system generates a list of all dates within the specified range.
 2. Manage Holidays
-    · User Story: As a user, I need to be able to manage holidays, including federal holidays, and be able to add my own custom holidays.
-        · Acceptance Criteria:
-            · The user can view a list of predefined federal holidays.
-            · The user can add new custom holidays with a specific date or recurring rule.
-            · The user can edit or delete existing holidays.
+    - User Story: As a user, I need to be able to manage holidays, including federal holidays, and be able to add my own custom holidays.
+        - Acceptance Criteria:
+            - The user can view a list of predefined federal holidays.
+            - The user can add new custom holidays with a specific date or recurring rule.
+            - The user can edit or delete existing holidays.
 3. Determine Actual Holiday Dates
-    · User Story: As a user, I need the system to determine the actual date for variable holidays (e.g., a holiday that falls on the 3rd Monday of January) for a given year.
-    · Acceptance Criteria:
-        · The system calculates the correct date for holidays that follow a variable rule (e.g., "3rd Monday of January").
-        · The user can view the calculated date for the current year and any specified year.
+    - User Story: As a user, I need the system to determine the actual date for variable holidays (e.g., a holiday that falls on the 3rd Monday of January) for a given year.
+    - Acceptance Criteria:
+        - The system calculates the correct date for holidays that follow a variable rule (e.g., "3rd Monday of January").
+        - The user can view the calculated date for the current year and any specified year.
 4. Export to CSV and SharePoint
-    · User Story: As a user, I need the means to take the generated date range and export it to a CSV file and also write it to a SharePoint list.
-    · Acceptance Criteria:
-        · The user can export the list of dates to a CSV file.
-        · The user can write the list of dates to a specified SharePoint list.
+    - User Story: As a user, I need the means to take the generated date range and export it to a CSV file and also write it to a SharePoint list.
+    - Acceptance Criteria:
+        - The user can export the list of dates to a CSV file.
+        - The user can write the list of dates to a specified SharePoint list.
 
 The system confirms the success of the export to both CSV and SharePoint.
 
