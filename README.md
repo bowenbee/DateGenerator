@@ -167,6 +167,10 @@ The solution runs on Microsoft 365 services alone, so it's easy to deploy with m
 ## 🛠️ Configuration Notes
 
 * Set **Sandbox Site** first: both list variables are picked from that site.
+* **Save** replaces the DateGenerator list's contents safely:
+  * It writes the new dates **first**. If that fails, you see the error and the existing rows are kept.
+  * Only after a successful write does it remove the previous rows, identified by their **Created** time. It removes them in batches of 2,000, because SharePoint's `RemoveIf` is limited to that many rows per call.
+  * A notification confirms the result. If any old rows remain, it asks you to Save again.
 * **Export Dates to CSV** creates an **anonymous, editable share link** so the app can download the file. Your tenant's sharing settings must allow "Anyone" links, or the export fails.
 * The exported CSV is deleted from OneDrive after one minute. If you want to keep exports, increase or remove the **Delay** and **Delete file** steps.
 * The Holidays rows use the numbering in **How Holidays Are Calculated**. For a variable holiday, `WeekNum` 0 means "last weekday of the month".
