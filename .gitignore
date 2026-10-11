@@ -1,0 +1,3 @@
+# pac deployment settings files hold per-environment values (list GUIDs, connection IDs).
+# Keep them local; generate one with: pac solution create-settings --solution-zip <zip> --settings-file <file>
+deployment/*settings*.json

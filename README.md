@@ -140,7 +140,10 @@ The solution runs on Microsoft 365 services alone, so it's easy to deploy with m
    * **Flow:** after importing (step 2), upload **Holidays.xlsx** to the site, point the flow's **List Holidays** action at it, and run **Provision Holiday and Date Generator Lists**.
 
    Both options create the same lists and columns.
-2. **Import the Date Generator solution.** Use managed for downstream environments. You can import manually, or with `pac solution import --settings-file`, using a settings file from [`deployment/`](deployment/). The Dev and Test files are there; update their list GUIDs to the lists you created in step 1.
+2. **Import the Date Generator solution.** Use managed for downstream environments. You can import manually, or with `pac solution import --settings-file`.
+   * Settings files hold per-environment values, so they're **kept out of git**: `deployment/*settings*.json` is in `.gitignore`.
+   * Generate one with `pac solution create-settings --solution-zip deployment/DateGenerator_managed.zip --settings-file deployment/DateGenerator_settings_<Env>.json`.
+   * Fill in the list GUIDs from step 1 and your connection IDs.
 3. **Set the environment variables** if you didn't use a settings file:
 
    | Variable | Schema name | Purpose |
@@ -193,7 +196,7 @@ The solution runs on Microsoft 365 services alone, so it's easy to deploy with m
 ## 📄 Related Documentation
 
 * [`sharepoint-provision/`](sharepoint-provision/): PnP PowerShell scripts that create the lists
-* [`deployment/`](deployment/): solution zips and `pac` settings files for Dev and Test
+* [`deployment/`](deployment/): managed and unmanaged solution zips. Local `pac` settings files also go here, but aren't committed.
 * [`data/`](data/): the federal holiday seed data (`Holidays.xlsx` and `Holidays.csv`)
 * [`pac solution` reference](https://learn.microsoft.com/power-platform/developer/cli/reference/solution): `pac solution import` and the `--settings-file` option
 
