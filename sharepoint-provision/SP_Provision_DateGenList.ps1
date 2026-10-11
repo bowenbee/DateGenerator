@@ -28,9 +28,11 @@ Add-PnPField -List $ListName -InternalName "Date" -DisplayName "Date" -Type Date
 Add-PnPField -List $ListName -InternalName "MonthNum" -DisplayName "MonthNum" -Type Number | Out-Null
 Add-PnPField -List $ListName -InternalName "Day" -DisplayName "Day" -Type Number -AddToDefaultView | Out-Null
 Add-PnPField -List $ListName -InternalName "Year" -DisplayName "Year" -Type Number -AddToDefaultView | Out-Null
+Add-PnPField -List $ListName -InternalName "Quarter" -DisplayName "Quarter" -Type Number -AddToDefaultView | Out-Null
+Add-PnPField -List $ListName -InternalName "FiscalYear" -DisplayName "FiscalYear" -Type Number -AddToDefaultView | Out-Null
 Add-PnPField -List $ListName -InternalName "StartOfWeek" -DisplayName "StartOfWeek" -Type DateTime -AddToDefaultView | Out-Null
 Add-PnPField -List $ListName -InternalName "EndOfWeek" -DisplayName "EndOfWeek" -Type DateTime -AddToDefaultView | Out-Null
-Add-PnPField -List $ListName -InternalName "ISOWeekNum" -DisplayName "ISOWeekNum" -Type Number -AddToDefaultView | Out-Null
+Add-PnPField -List $ListName -InternalName "ISOWeekofYear" -DisplayName "ISOWeekofYear" -Type Number -AddToDefaultView | Out-Null
 Add-PnPField -List $ListName -InternalName "WkNumDay" -DisplayName "WkNumDay" -Type Text -AddToDefaultView | Out-Null
 Add-PnPField -List $ListName -InternalName "WeekdayNum" -DisplayName "WeekdayNum" -Type Number -AddToDefaultView | Out-Null
 Add-PnPField -List $ListName -InternalName "isHoliday" -DisplayName "isHoliday" -Type Boolean -AddToDefaultView | Out-Null

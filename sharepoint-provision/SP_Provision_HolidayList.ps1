@@ -1,8 +1,8 @@
 # Provision the Date Generation List
 
 $SharePointSite = "https://powerfxhelp.sharepoint.com/sites/Sandbox"
-$ListName = "Holidays-Test"
-$HolidayCsv = Import-Csv ..\data\Holidays.csv
+$ListName = "Holidays"
+$HolidayCsv = Import-Csv (Join-Path $PSScriptRoot "..\data\Holidays.csv")
 Connect-PnPOnline -url $SharePointSite -Interactive
 
 
@@ -27,10 +27,12 @@ Add-PnPField -List $ListName -InternalName "MonthNum" -DisplayName "MonthNum" -T
 Add-PnPField -List $ListName -InternalName "Day" -DisplayName "Day" -Type Number -AddToDefaultView | Out-Null
 Add-PnPField -List $ListName -InternalName "WeekNum" -DisplayName "WeekNum" -Type Number -AddToDefaultView | Out-Null
 Add-PnPField -List $ListName -InternalName "DayofWeekNum" -DisplayName "DayofWeekNum" -Type Number -AddToDefaultView | Out-Null
+Add-PnPField -List $ListName -InternalName "FixedHoliday" -DisplayName "FixedHoliday" -Type Boolean -AddToDefaultView | Out-Null
 Add-PnPField -List $ListName -InternalName "HolidayType" -DisplayName "HolidayType" -Type Text -AddToDefaultView | Out-Null
 Add-PnPField -List $ListName -InternalName "Notes" -DisplayName "Notes" -Type Note -AddToDefaultView | Out-Null
 Set-PnPField -List $ListName "WeekNum" -Values @{Description = "The week number of the month in which the holiday occurs."}
 Set-PnPField -List $ListName "DayofWeekNum" -Values @{Description = "The numerical day of the week the holiday occurs as represented by excel weekday function. If the day varies, leave blank."}
+Set-PnPField -List $ListName "FixedHoliday" -Values @{Description = "Yes = always on MonthNum/Day. No = calculated from WeekNum/DayofWeekNum (WeekNum 0 = last weekday of the month)."}
 
 Foreach ($holiday in $HolidayCsv){
 
@@ -40,6 +42,7 @@ Foreach ($holiday in $HolidayCsv){
         WeekNum = $holiday.WeekNum
         Day = $holiday.Day
         DayofWeekNum = $holiday.DayofWeekNum
+        FixedHoliday = [bool]::Parse($holiday.FixedHoliday)
         HolidayType = $holiday.HolidayType
         Notes = $holiday.Notes
 
