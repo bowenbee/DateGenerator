@@ -1,0 +1,733 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_excelonlinebusiness": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "bb89_sharedexcelonlinebusiness_216f7"
+        },
+        "api": {
+          "name": "shared_excelonlinebusiness"
+        }
+      },
+      "shared_sharepointonline_1": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "bb89_DateGenSharePoint"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "Sandbox Site (bb89_SandboxSite)": {
+          "defaultValue": "https://powerfxhelp.sharepoint.com/sites/Sandbox",
+          "type": "String",
+          "metadata": {
+            "schemaName": "bb89_SandboxSite"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "79650ef6-8574-46bb-afc9-b2cf957cc53c"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "varHolidayListName": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "67b3432d-d3e2-4a93-ad15-3e66d273647e"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varHolidayListName",
+                "type": "string",
+                "value": "Holidays"
+              }
+            ]
+          }
+        },
+        "varHolidayFields": {
+          "runAfter": {
+            "varDateGeneratorList": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "809a9e82-ed48-4d0b-bc85-cfcc4befabf7"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varHolidayFields",
+                "type": "array",
+                "value": [
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": "false",
+                    "Title": "MonthNum"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": "false",
+                    "Title": "Day"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": "false",
+                    "Title": "WeekNum"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": "false",
+                    "Title": "DayofWeekNum"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldText"
+                    },
+                    "FieldTypeKind": 3,
+                    "Required": false,
+                    "Title": "Notes"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldText"
+                    },
+                    "FieldTypeKind": 2,
+                    "Required": false,
+                    "Title": "HolidayType"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.Field"
+                    },
+                    "FieldTypeKind": 8,
+                    "Title": "FixedHoliday",
+                    "Required": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "Populate_Holidays": {
+          "actions": {
+            "List_Holidays": {
+              "runAfter": {},
+              "metadata": {
+                "014TKYSK7CWO24AU2FJZCL27IADBFGRGT4": "/Date Generation/Holidays.xlsx",
+                "operationMetadataId": "9e6c185c-2b67-4153-ab8b-4d3f5feb1127",
+                "tableId": "{00000000-000C-0000-FFFF-FFFF00000000}",
+                "014TKYSK627BKQC2H7BNAYYBYHHQ4A7QL2": "/Date Generation/Holidays.xlsx",
+                "01ZBS5GI656VSHUJYFARD2CGZZCQPP6QAY": "/Holidays.xlsx"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_excelonlinebusiness",
+                  "operationId": "GetItems",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness"
+                },
+                "parameters": {
+                  "source": "@parameters('Sandbox Site (bb89_SandboxSite)')",
+                  "drive": "b!P0B7EjloSEy5AL4E9KbRg4MMz8GazJNPo_N5geoK1XB40BPqL92-SKYyZZmcfs4H",
+                  "file": "01ZBS5GI656VSHUJYFARD2CGZZCQPP6QAY",
+                  "table": "{00000000-000C-0000-FFFF-FFFF00000000}"
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              }
+            },
+            "Parse_JSON": {
+              "runAfter": {
+                "List_Holidays": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f0e7b79b-2fc5-4065-ad3a-090a77b8d55f"
+              },
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@variables('varHolidayFields')",
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "__metadata": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "FieldTypeKind": {
+                        "type": "integer"
+                      },
+                      "Title": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "__metadata",
+                      "FieldTypeKind",
+                      "Title"
+                    ]
+                  }
+                }
+              }
+            },
+            "Delete_Existing_List": {
+              "runAfter": {
+                "Parse_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "2ac53574-779c-4fb0-ae4b-a95946e94059"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_sharepointonline_1",
+                  "operationId": "HttpRequest",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "parameters": {
+                  "dataset": "@parameters('Sandbox Site (bb89_SandboxSite)')",
+                  "parameters/method": "DELETE",
+                  "parameters/uri": "_api/web/lists/getByTitle('@{variables('varHolidayListName')}')",
+                  "parameters/headers": {
+                    "IF-MATCH": "*"
+                  }
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              },
+              "description": "https://powerusers.microsoft.com/t5/Building-Flows/Delete-a-SharePoint-list/td-p/742443"
+            },
+            "Create_List": {
+              "runAfter": {
+                "Delete_Existing_List": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "2ac53574-779c-4fb0-ae4b-a95946e94059"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_sharepointonline_1",
+                  "operationId": "HttpRequest",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "parameters": {
+                  "dataset": "@parameters('Sandbox Site (bb89_SandboxSite)')",
+                  "parameters/method": "POST",
+                  "parameters/uri": "_api/web/Lists/",
+                  "parameters/headers": {
+                    "content-type": "application/json;odata=verbose",
+                    "accept": "application/json;odata=verbose"
+                  },
+                  "parameters/body": "{ '__metadata': { 'type': 'SP.List' }, 'AllowContentTypes': false,\n 'BaseTemplate': 100, 'ContentTypesEnabled': false, 'Description': 'Holidays List', 'Title': '@{variables('varHolidayListName')}' }"
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              }
+            },
+            "Add_Fields": {
+              "foreach": "@body('Parse_JSON')",
+              "actions": {
+                "Add_Fields_to_List": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "64c62984-9e0a-42c5-bf2b-468c3df920be"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_sharepointonline_1",
+                      "operationId": "HttpRequest",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                    },
+                    "parameters": {
+                      "dataset": "@parameters('Sandbox Site (bb89_SandboxSite)')",
+                      "parameters/method": "POST",
+                      "parameters/uri": "_api/web/Lists/getByTitle('@{variables('varHolidayListName')}')/fields",
+                      "parameters/headers": {
+                        "content-type": "application/json;odata=verbose",
+                        "accept": "application/json;odata=verbose"
+                      },
+                      "parameters/body": "@items('Add_Fields')"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                },
+                "Add_Field_to_Default_View": {
+                  "runAfter": {
+                    "Add_Fields_to_List": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "8ff6912c-eca5-42cb-bf90-0a718908fbbe"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_sharepointonline_1",
+                      "operationId": "HttpRequest",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                    },
+                    "parameters": {
+                      "dataset": "@parameters('Sandbox Site (bb89_SandboxSite)')",
+                      "parameters/method": "POST",
+                      "parameters/uri": "_api/web/Lists/getByTitle('@{variables('varHolidayListName')}')/views/getbytitle('All Items')/ViewFields/AddViewField",
+                      "parameters/body": "{\n\"strField\": \"@{items('Add_Fields')['Title']}\"\n}"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Create_List": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "4a78eb56-f2ba-40bc-9152-c7e8f62f157d"
+              },
+              "type": "Foreach"
+            },
+            "Populate_List": {
+              "foreach": "@outputs('List_Holidays')?['body/value']",
+              "actions": {
+                "Compose": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "b1bb5282-e731-4249-b67c-26692c0e5c78"
+                  },
+                  "type": "Compose",
+                  "inputs": {
+                    "Title": "@items('Populate_List')?['Title']",
+                    "MonthNum": "@int(items('Populate_List')?['MonthNum'])",
+                    "Day": "@int(items('Populate_List')?['Day'])",
+                    "WeekNum": "@int(items('Populate_List')?['WeekNum'])",
+                    "DayofWeekNum": "@int(items('Populate_List')?['DayofWeekNum'])",
+                    "HolidayType": "@items('Populate_List')?['HolidayType']",
+                    "Notes": "@items('Populate_List')?['Notes']",
+                    "FixedHoliday": "@items('Populate_List')?['FixedHoliday']"
+                  }
+                },
+                "Create_item": {
+                  "runAfter": {
+                    "Compose": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "35fbb10d-032a-4773-af28-2bc2a98a81bf"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_sharepointonline_1",
+                      "operationId": "PostItem",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                    },
+                    "parameters": {
+                      "dataset": "@parameters('Sandbox Site (bb89_SandboxSite)')",
+                      "table": "@variables('varHolidayListName')",
+                      "item": "@outputs('Compose')"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Add_Fields": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a447acec-a4a2-4d00-9291-b28e95e32329"
+              },
+              "type": "Foreach"
+            }
+          },
+          "runAfter": {
+            "Create_Date_Generator_List": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e364897f-da75-4faf-8353-fd1123a6dc40"
+          },
+          "type": "Scope"
+        },
+        "Create_Date_Generator_List": {
+          "actions": {
+            "Delete_Existing_List_DateGen": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "2ac53574-779c-4fb0-ae4b-a95946e94059"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_sharepointonline_1",
+                  "operationId": "HttpRequest",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "parameters": {
+                  "dataset": "@parameters('Sandbox Site (bb89_SandboxSite)')",
+                  "parameters/method": "DELETE",
+                  "parameters/uri": "_api/web/lists/getByTitle('@{variables('varDateGeneratorList')}')",
+                  "parameters/headers": {
+                    "IF-MATCH": "*"
+                  }
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              },
+              "description": "https://powerusers.microsoft.com/t5/Building-Flows/Delete-a-SharePoint-list/td-p/742443"
+            },
+            "Create_List_DateGen": {
+              "runAfter": {
+                "Delete_Existing_List_DateGen": [
+                  "Succeeded",
+                  "Failed"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "2ac53574-779c-4fb0-ae4b-a95946e94059"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_sharepointonline_1",
+                  "operationId": "HttpRequest",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "parameters": {
+                  "dataset": "@parameters('Sandbox Site (bb89_SandboxSite)')",
+                  "parameters/method": "POST",
+                  "parameters/uri": "_api/web/Lists/",
+                  "parameters/headers": {
+                    "content-type": "application/json;odata=verbose",
+                    "accept": "application/json;odata=verbose"
+                  },
+                  "parameters/body": "{ '__metadata': { 'type': 'SP.List' }, 'AllowContentTypes': false,\n 'BaseTemplate': 100, 'ContentTypesEnabled': false, 'Description': 'Holidays List', 'Title': '@{variables('varDateGeneratorList')}' }"
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              }
+            },
+            "Add_Fields_DateGen": {
+              "foreach": "@variables('varFieldsDateGenerator')",
+              "actions": {
+                "Add_Fields_to_List_DateGen": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "64c62984-9e0a-42c5-bf2b-468c3df920be"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_sharepointonline_1",
+                      "operationId": "HttpRequest",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                    },
+                    "parameters": {
+                      "dataset": "@parameters('Sandbox Site (bb89_SandboxSite)')",
+                      "parameters/method": "POST",
+                      "parameters/uri": "_api/web/Lists/getByTitle('@{variables('varDateGeneratorList')}')/fields",
+                      "parameters/headers": {
+                        "content-type": "application/json;odata=verbose",
+                        "accept": "application/json;odata=verbose"
+                      },
+                      "parameters/body": "@items('Add_Fields_DateGen')"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                },
+                "Add_Field_to_Default_View_DateGen": {
+                  "runAfter": {
+                    "Add_Fields_to_List_DateGen": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "8ff6912c-eca5-42cb-bf90-0a718908fbbe"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_sharepointonline_1",
+                      "operationId": "HttpRequest",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                    },
+                    "parameters": {
+                      "dataset": "@parameters('Sandbox Site (bb89_SandboxSite)')",
+                      "parameters/method": "POST",
+                      "parameters/uri": "_api/web/Lists/getByTitle('@{variables('varDateGeneratorList')}')/views/getbytitle('All Items')/ViewFields/AddViewField",
+                      "parameters/body": "{\n\"strField\": \"@{items('Add_Fields_DateGen')['Title']}\"\n}"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Create_List_DateGen": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "4a78eb56-f2ba-40bc-9152-c7e8f62f157d"
+              },
+              "type": "Foreach"
+            }
+          },
+          "runAfter": {
+            "varFieldsDateGenerator": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9040eece-b3dc-4955-97b0-d32b1c628856"
+          },
+          "type": "Scope"
+        },
+        "varFieldsDateGenerator": {
+          "runAfter": {
+            "varHolidayFields": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "809a9e82-ed48-4d0b-bc85-cfcc4befabf7"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varFieldsDateGenerator",
+                "type": "array",
+                "value": [
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldDateTime"
+                    },
+                    "FieldTypeKind": 4,
+                    "Required": true,
+                    "Title": "Date",
+                    "DateTimeCalendarType": 1,
+                    "DisplayFormat": 0
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": "false",
+                    "Title": "MonthNum"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": "false",
+                    "Title": "Day"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": false,
+                    "Title": "Year"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": false,
+                    "Title": "FiscalYear"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": "false",
+                    "Title": "Quarter"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldDateTime"
+                    },
+                    "FieldTypeKind": 4,
+                    "Required": false,
+                    "Title": "StartOfWeek",
+                    "DateTimeCalendarType": 1,
+                    "DisplayFormat": 0
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldDateTime"
+                    },
+                    "FieldTypeKind": 4,
+                    "Required": false,
+                    "Title": "EndOfWeek",
+                    "DateTimeCalendarType": 1,
+                    "DisplayFormat": 0
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": "false",
+                    "Title": "ISOWeekofYear"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldText"
+                    },
+                    "FieldTypeKind": 2,
+                    "Required": false,
+                    "Title": "WkNumDay"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldNumber"
+                    },
+                    "FieldTypeKind": 9,
+                    "Required": false,
+                    "Title": "WeekdayNum"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.Field"
+                    },
+                    "FieldTypeKind": 8,
+                    "Required": false,
+                    "Title": "isHoliday"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.FieldText"
+                    },
+                    "FieldTypeKind": 2,
+                    "Required": false,
+                    "Title": "HolidayName"
+                  },
+                  {
+                    "__metadata": {
+                      "type": "SP.Field"
+                    },
+                    "FieldTypeKind": 8,
+                    "Required": false,
+                    "Title": "isWeekEnd"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "varDateGeneratorList": {
+          "runAfter": {
+            "varHolidayListName": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4d90fa29-bd6b-4684-b6ff-f554dffc2cc0"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varDateGeneratorList",
+                "type": "string",
+                "value": "DateGenerator"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

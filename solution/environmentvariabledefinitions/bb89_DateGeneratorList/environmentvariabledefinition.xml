@@ -1,0 +1,18 @@
+<environmentvariabledefinition schemaname="bb89_DateGeneratorList">
+  <apiid>/providers/microsoft.powerapps/apis/shared_sharepointonline</apiid>
+  <description default="Destination List where Dates will be created">
+    <label description="Destination List where Dates will be created" languagecode="1033" />
+  </description>
+  <displayname default="Date Generator List">
+    <label description="Date Generator List" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <parameterkey>table</parameterkey>
+  <parentdefinitionid>
+    <schemaname>bb89_SandboxSite</schemaname>
+  </parentdefinitionid>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>

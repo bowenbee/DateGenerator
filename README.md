@@ -141,8 +141,8 @@ The solution runs on Microsoft 365 services alone, so it's easy to deploy with m
 
    Both options create the same lists and columns.
 2. **Import the Date Generator solution.** Use managed for downstream environments. You can import manually, or with `pac solution import --settings-file`.
-   * Settings files hold per-environment values, so they're **kept out of git**: `deployment/*settings*.json` is in `.gitignore`.
-   * Generate one with `pac solution create-settings --solution-zip deployment/DateGenerator_managed.zip --settings-file deployment/DateGenerator_settings_<Env>.json`.
+   * Settings files hold per-environment values, so they're **kept out of git**: `*_settings*.json` is in `.gitignore`.
+   * Generate one with `pac solution create-settings --solution-zip releases/DateGenerator_<version>_managed.zip --settings-file DateGenerator_settings_<Env>.json`.
    * Fill in the list GUIDs from step 1 and your connection IDs.
 3. **Set the environment variables** if you didn't use a settings file:
 
@@ -200,7 +200,9 @@ The solution runs on Microsoft 365 services alone, so it's easy to deploy with m
 ## 📄 Related Documentation
 
 * [`sharepoint-provision/`](sharepoint-provision/): PnP PowerShell scripts that create the lists
-* [`deployment/`](deployment/): managed and unmanaged solution zips. Local `pac` settings files also go here, but aren't committed.
+* [`releases/`](releases/): versioned managed and unmanaged solution zips (e.g. `DateGenerator_1_0_0_3_managed.zip`)
+* [`solution/`](solution/): the unpacked solution source (canvas app expanded to source files)
+* Local `pac` settings files (`DateGenerator_settings*.json`) live in the project root but aren't committed.
 * [`data/`](data/): the federal holiday seed data (`Holidays.xlsx` and `Holidays.csv`)
 * [`pac solution` reference](https://learn.microsoft.com/power-platform/developer/cli/reference/solution): `pac solution import` and the `--settings-file` option
 

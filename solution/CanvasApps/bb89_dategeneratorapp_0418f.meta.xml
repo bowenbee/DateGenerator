@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>bb89_dategeneratorapp_0418f</Name>
+  <AppVersion>2026-10-11T02:55:34Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.26093.11.0</CreatedByClientVersion>
+  <MinClientVersion>3.26093.11.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1731","primaryDeviceHeight":"827","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.26093.11","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false","offlineLargeFilesSupport":"false","sienaVersion":"20261011T022847Z-3.26093.11.0","m365CopilotSettingValue":"0","coauthoringEnabled":"true","multipleWritersEnabled":"true","acceptedCoauthoringTerms":"true"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>rgba(40, 112, 134, 1)</BackgroundColor>
+  <DisplayName>Date Generator App</DisplayName>
+  <Description xsi:nil="true"></Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher xsi:nil="true"></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{"3d8e942c-a12b-4a46-b196-cb405c23be27":{"id":"/providers/microsoft.powerapps/apis/shared_sharepointonline","displayName":"SharePoint","iconUri":"https://static.powerapps.com/resource/ppcr/releases/v1.0.1827/1.0.1827.4913/sharepointonline/icon.png","dataSources":["Date Generator List","Holidays List"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{"https://powerfxhelp.sharepoint.com/sites/Sandbox_bb89_SandboxSite":{"datasetOverride":{"name":"https://powerfxhelp.sharepoint.com/sites/Sandbox","environmentVariableName":"bb89_SandboxSite"},"dataSources":{"Date Generator List":{"tableName":"633769e6-f846-4ab8-adac-be0a687a9699","tableNameOverride":{"name":"633769e6-f846-4ab8-adac-be0a687a9699","environmentVariableName":"bb89_DateGeneratorList"}},"Holidays List":{"tableName":"9bdb164d-779d-4f11-b212-3d66171bbb50","tableNameOverride":{"name":"9bdb164d-779d-4f11-b212-3d66171bbb50","environmentVariableName":"bb89_HolidaysList"}}}}},"apiTier":"Standard","actions":["providers/PowerPlatform.Governance/Operations/Read","providers/PowerPlatform.Governance/Operations/Write","providers/PowerPlatform.Governance/Operations/Delete"]},"e701a176-fa77-437d-ad8d-f2d398189445":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://static.powerapps.com/resource/ppcr/releases/v1.0.1827/1.0.1827.4908/logicflows/icon.png","dataSources":["ExportDatestoCSV"],"dependencies":["9f28f102-d172-41d4-8a5a-42a2f81992b2"],"dependents":[],"parameterHints":{"workflowName":{"value":"5bf7c721-8dad-44b1-854f-50c3408efca6"},"workflowEntityId":{"value":"e9af88d4-d60f-ef11-9f8a-000d3a5c376f"},"workflowDisplayName":{"value":"Export Dates to CSV"},"9f28f102-d172-41d4-8a5a-42a2f81992b2":{"value":"shared_onedriveforbusiness"}},"parameterHintsV2":{"workflowName":{"value":"5bf7c721-8dad-44b1-854f-50c3408efca6"},"workflowEntityId":{"value":"e9af88d4-d60f-ef11-9f8a-000d3a5c376f"},"workflowDisplayName":{"value":"Export Dates to CSV"},"shared_onedriveforbusiness":{"value":"9f28f102-d172-41d4-8a5a-42a2f81992b2"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"]},"9f28f102-d172-41d4-8a5a-42a2f81992b2":{"id":"/providers/microsoft.powerapps/apis/shared_onedriveforbusiness","displayName":"OneDrive for Business","iconUri":"https://static.powerapps.com/resource/ppcr/releases/v1.0.1827/1.0.1827.4902/onedriveforbusiness/icon.png","dataSources":[],"dependencies":[],"dependents":["e701a176-fa77-437d-ad8d-f2d398189445"],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard"}}</ConnectionReferences>
+  <DatabaseReferences>{}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>0</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"dependencyid":"e9af88d4-d60f-ef11-9f8a-000d3a5c376f","componenttype":29,"componenttypeplatformname":"Workflow"},{"logicalname":"bb89_SandboxSite","componenttype":380,"componenttypeplatformname":"EnvironmentVariableDefinition"},{"logicalname":"bb89_DateGeneratorList","componenttype":380,"componenttypeplatformname":"EnvironmentVariableDefinition"},{"logicalname":"bb89_HolidaysList","componenttype":380,"componenttypeplatformname":"EnvironmentVariableDefinition"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/bb89_dategeneratorapp_0418f_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/bb89_dategeneratorapp_0418f_DocumentUri.msapp</DocumentUri>
+  <AdditionalUris>
+    <AdditionalUri>/CanvasApps/bb89_dategeneratorapp_0418f_AdditionalUris0_identity.json</AdditionalUri>
+  </AdditionalUris>
+</CanvasApp>

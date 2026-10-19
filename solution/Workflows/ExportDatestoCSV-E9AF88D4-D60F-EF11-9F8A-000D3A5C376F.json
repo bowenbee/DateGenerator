@@ -1,0 +1,286 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_onedriveforbusiness": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "bb89_sharedonedriveforbusiness_38459"
+        },
+        "api": {
+          "name": "shared_onedriveforbusiness"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "cfc09e3c-6249-4639-8d79-80112a54aa79"
+          },
+          "type": "Request",
+          "kind": "PowerAppV2",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "Data",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "Parse_JSON": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "7d57c8d2-37f2-4a5f-af41-df7843b7f67e"
+          },
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@triggerBody()['text']",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Date": {
+                    "type": "string"
+                  },
+                  "Day": {
+                    "type": "integer"
+                  },
+                  "EndOfWeek": {
+                    "type": "string"
+                  },
+                  "FirstDayOfMonth": {
+                    "type": "string"
+                  },
+                  "FiscalYear": {
+                    "type": "integer"
+                  },
+                  "HolidayName": {
+                    "type": "string"
+                  },
+                  "ISOWeekofYear": {
+                    "type": "integer"
+                  },
+                  "MonthNum": {
+                    "type": "integer"
+                  },
+                  "ObservedHoliday": {
+                    "type": "string"
+                  },
+                  "Quarter": {
+                    "type": "integer"
+                  },
+                  "StartOfWeek": {
+                    "type": "string"
+                  },
+                  "Title": {
+                    "type": "string"
+                  },
+                  "WeekDay": {
+                    "type": "string"
+                  },
+                  "WeekdayNum": {
+                    "type": "integer"
+                  },
+                  "WkNumDay": {
+                    "type": "string"
+                  },
+                  "Year": {
+                    "type": "integer"
+                  },
+                  "isHoliday": {
+                    "type": "boolean"
+                  },
+                  "isWeekEnd": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "Date",
+                  "Day",
+                  "EndOfWeek",
+                  "FirstDayOfMonth",
+                  "FiscalYear",
+                  "HolidayName",
+                  "ISOWeekofYear",
+                  "MonthNum",
+                  "ObservedHoliday",
+                  "Quarter",
+                  "StartOfWeek",
+                  "Title",
+                  "WeekDay",
+                  "WeekdayNum",
+                  "WkNumDay",
+                  "Year",
+                  "isHoliday",
+                  "isWeekEnd"
+                ]
+              }
+            }
+          }
+        },
+        "Create_CSV_table": {
+          "runAfter": {
+            "Parse_JSON": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "78ce5229-aceb-4baa-b694-85c43eba3d33"
+          },
+          "type": "Table",
+          "inputs": {
+            "from": "@body('Parse_JSON')",
+            "format": "CSV"
+          }
+        },
+        "Create_file": {
+          "runAfter": {
+            "Create_CSV_table": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a89dee0c-885c-41b4-8cff-43ceadde234c"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_onedriveforbusiness",
+              "operationId": "CreateFile",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+            },
+            "parameters": {
+              "folderPath": "/Date Generation",
+              "name": "DateGenerator-@{formatDateTime(utcNow(),'MMddyyyy-hhmmss')}.csv",
+              "body": "@body('Create_CSV_table')"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runtimeConfiguration": {
+            "contentTransfer": {
+              "transferMode": "Chunked"
+            }
+          }
+        },
+        "Respond_to_a_Power_App_or_flow": {
+          "runAfter": {
+            "Create_share_link": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e2e08469-24ed-40a0-a7cc-80fb74192e28"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {
+              "filelink": "@{concat(outputs('Create_share_link')?['body/WebUrl'],'?download=1')}"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "filelink": {
+                  "title": "filelink",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "Create_share_link": {
+          "runAfter": {
+            "Create_file": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "67ac1df0-e13e-4667-afc7-36161bb6b1a3"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_onedriveforbusiness",
+              "operationId": "CreateShareLinkV2",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+            },
+            "parameters": {
+              "id": "@outputs('Create_file')?['body/Id']",
+              "type": "Edit",
+              "scope": "Anonymous"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Delay": {
+          "runAfter": {
+            "Respond_to_a_Power_App_or_flow": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "8aa6e928-7d4e-45c4-8798-7fc9126120c8"
+          },
+          "type": "Wait",
+          "inputs": {
+            "interval": {
+              "count": 1,
+              "unit": "Minute"
+            }
+          }
+        },
+        "Delete_file": {
+          "runAfter": {
+            "Delay": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7d3e0cb0-9710-486c-a2ea-2175f2196d00"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_onedriveforbusiness",
+              "operationId": "DeleteFile",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+            },
+            "parameters": {
+              "id": "@outputs('Create_file')?['body/Id']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

@@ -1,0 +1,18 @@
+<environmentvariabledefinition schemaname="bb89_HolidaysList">
+  <apiid>/providers/microsoft.powerapps/apis/shared_sharepointonline</apiid>
+  <description default="List of Holidays for Date Generator">
+    <label description="List of Holidays for Date Generator" languagecode="1033" />
+  </description>
+  <displayname default="Holidays List">
+    <label description="Holidays List" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <parameterkey>table</parameterkey>
+  <parentdefinitionid>
+    <schemaname>bb89_SandboxSite</schemaname>
+  </parentdefinitionid>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>
